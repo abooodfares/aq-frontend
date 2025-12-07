@@ -67,12 +67,7 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                 />
             </div>
 
-            <button
-                className="sidebar-toggle left"
-                onClick={toggleSidebar}
-            >
-                {isOpen ? '◀' : '▶'}
-            </button>
+
         </div>
     );
 };

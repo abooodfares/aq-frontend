@@ -15,12 +15,7 @@ const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen, toggleSidebar }) =>
                 <SidebarFooter />
             </div>
 
-            <button
-                className="sidebar-toggle right"
-                onClick={toggleSidebar}
-            >
-                {isOpen ? '▶' : '◀'}
-            </button>
+
         </div>
     );
 };

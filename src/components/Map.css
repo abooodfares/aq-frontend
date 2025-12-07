@@ -17,13 +17,15 @@
     background: #f8f9fa;
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
     z-index: 100;
-    transition: transform 0.3s ease;
-    overflow-y: auto;
+    transition: transform 0.3s ease, margin 0.3s ease;
 }
 
 .left-sidebar.closed {
     transform: translateX(100%);
+    margin-right: -280px;
 }
+
+
 
 .sidebar-content {
     padding: 20px;
@@ -272,7 +274,8 @@ input:checked+.toggle-slider:before {
     height: 48px;
     border-radius: 0 8px 8px 0;
     cursor: pointer;
-    display: flex;
+    display: none;
+    /* Hidden on desktop */
     align-items: center;
     justify-content: center;
     font-size: 12px;
@@ -349,7 +352,10 @@ input:checked+.toggle-slider:before {
 
 .right-sidebar.closed {
     transform: translateX(-100%);
+    margin-left: -280px;
 }
+
+
 
 .right-sidebar .sidebar-content {
     display: flex;
@@ -442,11 +448,18 @@ input:checked+.toggle-slider:before {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .real-estate-map {
+        flex-direction: column;
+        /* Start stacking if needed, but absolute sidebars override this */
+    }
 
     .left-sidebar,
     .right-sidebar {
         position: absolute;
         height: 100%;
+        width: 85%;
+        max-width: 360px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     }
 
     .left-sidebar {
@@ -456,6 +469,61 @@ input:checked+.toggle-slider:before {
     .right-sidebar {
         left: 0;
     }
+
+    /* Reset margins for mobile absolute positioning */
+    .left-sidebar.closed {
+        margin-right: 0;
+    }
+
+    .right-sidebar.closed {
+        margin-left: 0;
+    }
+
+    /* Larger touch targets for toggles */
+    /* Larger touch targets for toggles, fixed to screen edges */
+    .sidebar-toggle {
+        display: flex;
+        /* Show on mobile */
+        position: fixed;
+        top: 50%;
+        width: 40px;
+        height: 60px;
+        font-size: 16px;
+        z-index: 102;
+    }
+
+    /* Left Sidebar is on Right side (rtl), so toggle is on Right edge */
+    .sidebar-toggle.left {
+        left: auto;
+        right: 0;
+        border-radius: 8px 0 0 8px;
+        /* Rounded on left side */
+        border-right: none;
+        border-left: 1px solid #e0e0e0;
+    }
+
+    /* Right Sidebar is on Left side (rtl), so toggle is on Left edge */
+    .sidebar-toggle.right {
+        right: auto;
+        left: 0;
+        border-radius: 0 8px 8px 0;
+        /* Rounded on right side */
+        border-left: none;
+        border-right: 1px solid #e0e0e0;
+    }
+
+    /* Remove the complex translateX logic for mobile */
+    /* Remove the complex translateX logic for mobile */
+    /* Since buttons are now outside, they don't move with sidebar. 
+       We just need to ensure correct icon rotation or state? 
+       Actually, if they are fixed at edge, they don't move. 
+       Only the ICON might need to change, but the text changes in JS (arrow direction).
+       So we probably don't need 'rotate' logic anymore if arrows are text.
+       However, if we want the arrow to flip based on state...
+       The JS logic {isOpen ? '◀' : '▶'} handles the arrow direction characters directly.
+       So we DON'T need CSS rotation for that.
+       We should clean up the 'rotate' styles.
+    */
 }
 
 /* Scrollbar Styling */

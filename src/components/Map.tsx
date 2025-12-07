@@ -31,6 +31,20 @@ const MapComponent: React.FC = () => {
                 isOpen={sidebarState.rightSidebarOpen}
                 toggleSidebar={sidebarState.toggleRightSidebar}
             />
+
+            <button
+                className="sidebar-toggle left"
+                onClick={sidebarState.toggleLeftSidebar}
+            >
+                {sidebarState.leftSidebarOpen ? '◀' : '▶'}
+            </button>
+
+            <button
+                className="sidebar-toggle right"
+                onClick={sidebarState.toggleRightSidebar}
+            >
+                {sidebarState.rightSidebarOpen ? '▶' : '◀'}
+            </button>
         </div>
     );
 };
