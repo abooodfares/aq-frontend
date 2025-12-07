@@ -43,6 +43,16 @@
     overflow-y: auto;
 }
 
+.location-row {
+    display: flex;
+    gap: 12px;
+}
+
+.location-row .filter-group {
+    flex: 1;
+    margin-bottom: 20px;
+}
+
 /* Filter Groups */
 .filter-group {
     margin-bottom: 20px;
