@@ -10,26 +10,52 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 const MapView: React.FC = () => {
     const { mapState } = useApp();
     const { viewState, setViewState, properties, addProperty, selectedProperty, setSelectedProperty } = mapState;
+
     return (
         <div className="map-container-main">
             <Map
-                onClick={(e) => {
+                onClick={async (e) => {
+                    // Check if popup is open/property selected, close it first
+                    if (selectedProperty) {
+                        setSelectedProperty(null);
+                        return;
+                    }
+
                     const { lng, lat } = e.lngLat;
+                    let city = 'جاري التحميل...';
+                    let district = '';
+
+                    try {
+                        const response = await fetch(
+                            `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${MAPBOX_TOKEN}&types=place,neighborhood,locality&language=ar`
+                        );
+                        const data = await response.json();
+
+                        if (data.features) {
+                            data.features.forEach((feature: any) => {
+                                if (feature.place_type.includes('place')) {
+                                    city = feature.text;
+                                }
+                                if (feature.place_type.includes('neighborhood') || feature.place_type.includes('locality')) {
+                                    district = feature.text;
+                                }
+                            });
+                        }
+                    } catch (error) {
+                        console.error("Reverse geocoding failed", error);
+                        city = 'غير معروف';
+                    }
+
                     const newProperty: Property = {
                         id: Date.now(),
                         longitude: lng,
                         latitude: lat,
                         price: '📍',
-                        type: 'apartment', // Default type
-                        city: 'الرياض',
-                        district: 'حي الملقا'
+                        type: 'apartment',
+                        city: city,
+                        district: district || 'غير محدد'
                     };
-                    // Only add property if not clicking on existing one (logic handled by stopPropagation in marker)
-                    // But if popup is open, maybe close it?
-                    if (selectedProperty) {
-                        setSelectedProperty(null);
-                        return;
-                    }
+
                     addProperty(newProperty);
                 }}
                 {...viewState}
