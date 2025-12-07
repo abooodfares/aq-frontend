@@ -4,6 +4,8 @@ export interface Property {
     latitude: number;
     price: string;
     type: 'villa' | 'apartment' | 'land' | 'commercial';
+    city?: string;
+    district?: string;
 }
 
 export interface PropertyFilter {

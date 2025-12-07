@@ -20,7 +20,9 @@ const MapView: React.FC = () => {
                         longitude: lng,
                         latitude: lat,
                         price: '📍',
-                        type: 'apartment' // Default type
+                        type: 'apartment', // Default type
+                        city: 'الرياض',
+                        district: 'حي الملقا'
                     };
                     // Only add property if not clicking on existing one (logic handled by stopPropagation in marker)
                     // But if popup is open, maybe close it?
@@ -56,7 +58,8 @@ const MapView: React.FC = () => {
                     >
                         <div style={{ padding: '8px', minWidth: '150px' }}>
                             <h3 style={{ margin: '0 0 8px 0', fontSize: '16px' }}>{selectedProperty.price}</h3>
-                            <p style={{ margin: 0, color: '#666' }}>Type: {selectedProperty.type}</p>
+                            <p style={{ margin: 0, color: '#333', fontWeight: 'bold' }}>{selectedProperty.city} - {selectedProperty.district}</p>
+                            <p style={{ margin: '4px 0 0 0', color: '#666' }}>Type: {selectedProperty.type}</p>
                             <p style={{ margin: '4px 0 0 0', fontSize: '12px', color: '#999' }}>
                                 Lat: {selectedProperty.latitude.toFixed(4)}, Lng: {selectedProperty.longitude.toFixed(4)}
                             </p>

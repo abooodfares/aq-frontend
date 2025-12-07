@@ -392,28 +392,25 @@ input:checked+.toggle-slider:before {
 }
 
 .price-tag {
-    background: #1a2332;
-    color: white;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-size: 13px;
-    font-weight: 600;
+    /* bg, color, padding removed for 'just icon' look */
+    background: transparent;
+    color: inherit;
+    /* or fixed color if user wants */
+    padding: 0;
+    font-size: 24px;
+    /* Larger icon size */
+    font-weight: normal;
     white-space: nowrap;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: none;
     position: relative;
+    cursor: pointer;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    /* Optional: add shadow to make emoji pop */
 }
 
+/* Pointer removed */
 .price-tag::after {
-    content: '';
-    position: absolute;
-    bottom: -6px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid #1a2332;
+    display: none;
 }
 
 /* Right Sidebar - Navigation */
