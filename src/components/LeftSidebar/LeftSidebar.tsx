@@ -3,19 +3,14 @@ import PropertyTypeToggle from './PropertyTypeToggle';
 import LocationSelectors from './LocationSelectors';
 import RangeFilter from './RangeFilter';
 import AdvancedFilters from './AdvancedFilters';
-import type { FilterState } from '../../models';
+import type { FilterState } from '../../models/types';
 
-interface LeftSidebarProps {
-    isOpen: boolean;
-    toggleSidebar: () => void;
-    filterState: FilterState;
-}
+import { useApp } from '../../context/AppContext';
 
-const LeftSidebar: React.FC<LeftSidebarProps> = ({
-    isOpen,
-    toggleSidebar,
-    filterState
-}) => {
+const LeftSidebar: React.FC = () => {
+    const { filterState, sidebarState } = useApp();
+    const { leftSidebarOpen: isOpen } = sidebarState;
+
     const {
         propertyType,
         setPropertyType,

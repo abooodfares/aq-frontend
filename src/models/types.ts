@@ -45,6 +45,8 @@ export interface MapState {
     viewState: ViewState;
     setViewState: (state: ViewState) => void;
     properties: Property[];
+    addProperty: (property: Property) => void;
+    removeProperty: (id: number) => void;
 }
 
 export interface SidebarState {

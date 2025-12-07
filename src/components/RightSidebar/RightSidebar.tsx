@@ -2,12 +2,12 @@ import React from 'react';
 import NavigationMenu from './NavigationMenu';
 import SidebarFooter from './SidebarFooter';
 
-interface RightSidebarProps {
-    isOpen: boolean;
-    toggleSidebar: () => void;
-}
+import { useApp } from '../../context/AppContext';
 
-const RightSidebar: React.FC<RightSidebarProps> = ({ isOpen, toggleSidebar }) => {
+const RightSidebar: React.FC = () => {
+    const { sidebarState } = useApp();
+    const { rightSidebarOpen: isOpen } = sidebarState;
+
     return (
         <div className={`right-sidebar ${isOpen ? 'open' : 'closed'}`}>
             <div className="sidebar-content">

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { MenuItem } from '../../models';
+import type { MenuItem } from '../../models/types';
 
 const NavigationMenu: React.FC = () => {
     const menuItems: MenuItem[] = [

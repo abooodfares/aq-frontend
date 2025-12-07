@@ -1,5 +1,5 @@
 import React from 'react';
-import type { MenuItem } from '../../models';
+import type { MenuItem } from '../../models/types';
 
 const SidebarFooter: React.FC = () => {
     const footerItems: MenuItem[] = [

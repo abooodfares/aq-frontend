@@ -1,6 +1,6 @@
 import React from 'react';
 import { Marker } from 'react-map-gl';
-import type { Property } from '../../models';
+import type { Property } from '../../models/types';
 
 interface PropertyMarkerProps {
     property: Property;

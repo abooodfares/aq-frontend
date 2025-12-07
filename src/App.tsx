@@ -1,9 +1,13 @@
 import React from 'react';
 import Map from './components/Map';
 
+import { AppProvider } from './context/AppContext';
+
 const App: React.FC = () => {
     return (
-        <Map />
+        <AppProvider>
+            <Map />
+        </AppProvider>
     );
 };
 

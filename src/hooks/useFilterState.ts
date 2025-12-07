@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { FilterState } from '../models';
+import type { FilterState } from '../models/types';
 
 export const useFilterState = (): FilterState => {
     const [propertyType, setPropertyType] = useState<'بيع' | 'إيجار'>('بيع');
