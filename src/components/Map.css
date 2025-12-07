@@ -12,17 +12,27 @@
 
 /* Left Sidebar - Filters */
 .left-sidebar {
-    position: relative;
-    width: 280px;
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    /* Start from top */
+    /* transform: translateY(-50%); Removed vertical centering */
+    width: 320px;
+    height: auto;
+    max-height: 90vh;
+    /* Increased max-height */
     background: #f8f9fa;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     z-index: 100;
-    transition: transform 0.3s ease, margin 0.3s ease;
+    border-radius: 16px;
+    transition: transform 0.3s ease, margin 0.3s ease, opacity 0.3s ease;
 }
 
 .left-sidebar.closed {
-    transform: translateX(100%);
-    margin-right: -280px;
+    transform: translateX(-150%);
+    /* Just move left, no vertical shift needed */
+    opacity: 0;
+    pointer-events: none;
 }
 
 
@@ -351,8 +361,8 @@ input:checked+.toggle-slider:before {
 }
 
 .right-sidebar.closed {
-    transform: translateX(-100%);
-    margin-left: -280px;
+    transform: translateX(100%);
+    margin-right: -280px;
 }
 
 
@@ -463,20 +473,33 @@ input:checked+.toggle-slider:before {
     }
 
     .left-sidebar {
-        right: 0;
+        left: 0;
+        height: auto;
+        /* Let content dictate height, or keep fixed height? User asked for 'height of form start from top'. Maybe max-height is better? Or stick to 40% but at top? 'height is 40%' was previous. Now 'height of form start from top'. I will interpret as: Position at top, height auto (or restricted). But previous req was 'small height is 40%'. I will keep 40% height but move position to Top. */
+        height: 50%;
+        /* Slightly larger for easier reading */
+        top: 20px;
+        /* Start from top */
+        border-radius: 0 16px 16px 0;
+        /* Attach to left edge? No, it's floating card style users liked. Let's keep card style but top. */
+        width: 90%;
+        /* Center horiz slightly */
+        left: 5%;
+        /* Center horiz */
+        border-radius: 16px;
     }
 
     .right-sidebar {
-        left: 0;
+        right: 0;
     }
 
     /* Reset margins for mobile absolute positioning */
     .left-sidebar.closed {
-        margin-right: 0;
+        margin-left: 0;
     }
 
     .right-sidebar.closed {
-        margin-left: 0;
+        margin-right: 0;
     }
 
     /* Larger touch targets for toggles */
@@ -492,24 +515,24 @@ input:checked+.toggle-slider:before {
         z-index: 102;
     }
 
-    /* Left Sidebar is on Right side (rtl), so toggle is on Right edge */
+    /* Left Sidebar Toggle (controls filter on Left) -> Left Edge */
     .sidebar-toggle.left {
-        left: auto;
-        right: 0;
-        border-radius: 8px 0 0 8px;
-        /* Rounded on left side */
-        border-right: none;
-        border-left: 1px solid #e0e0e0;
-    }
-
-    /* Right Sidebar is on Left side (rtl), so toggle is on Left edge */
-    .sidebar-toggle.right {
-        right: auto;
         left: 0;
+        right: auto;
         border-radius: 0 8px 8px 0;
         /* Rounded on right side */
         border-left: none;
         border-right: 1px solid #e0e0e0;
+    }
+
+    /* Right Sidebar Toggle (controls nav on Right) -> Right Edge */
+    .sidebar-toggle.right {
+        right: 0;
+        left: auto;
+        border-radius: 8px 0 0 8px;
+        /* Rounded on left side */
+        border-right: none;
+        border-left: 1px solid #e0e0e0;
     }
 
     /* Remove the complex translateX logic for mobile */

@@ -15,10 +15,9 @@ const MapComponent: React.FC = () => {
 
     return (
         <div className="real-estate-map">
-            <LeftSidebar
-                isOpen={sidebarState.leftSidebarOpen}
-                toggleSidebar={sidebarState.toggleLeftSidebar}
-                filterState={filterState}
+            <RightSidebar
+                isOpen={sidebarState.rightSidebarOpen}
+                toggleSidebar={sidebarState.toggleRightSidebar}
             />
 
             <MapView
@@ -27,9 +26,10 @@ const MapComponent: React.FC = () => {
                 properties={mapState.properties}
             />
 
-            <RightSidebar
-                isOpen={sidebarState.rightSidebarOpen}
-                toggleSidebar={sidebarState.toggleRightSidebar}
+            <LeftSidebar
+                isOpen={sidebarState.leftSidebarOpen}
+                toggleSidebar={sidebarState.toggleLeftSidebar}
+                filterState={filterState}
             />
 
             <button

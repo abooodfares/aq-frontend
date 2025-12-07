@@ -46,8 +46,6 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                     setSelectedDistrict={setSelectedDistrict}
                 />
 
-                <button className="search-btn">ابحث الآن</button>
-
                 <RangeFilter
                     label="السعر"
                     range={priceRange}
@@ -65,6 +63,8 @@ const LeftSidebar: React.FC<LeftSidebarProps> = ({
                     showAdvancedFilters={showAdvancedFilters}
                     setShowAdvancedFilters={setShowAdvancedFilters}
                 />
+
+                <button className="search-btn" style={{ marginTop: '20px' }}>ابحث الآن</button>
             </div>
 
 
