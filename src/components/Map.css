@@ -83,6 +83,96 @@
     border-color: #1a2332;
 }
 
+/* Main Navbar */
+.main-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background: #1a1f3a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    color: white;
+    direction: rtl;
+}
+
+.navbar-right,
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Default: Hide toggles on desktop if desired, or show them.
+   User request: "menu button hidden when desktop"
+   We will hide it by default for desktop, and show it on mobile in media query.
+   Actually, the user *just* added them to navbar.
+   If we hide them on desktop, how do they open the sidebar? 
+   Maybe on desktop the sidebar is always open? Or maybe there's another way?
+   Wait, if we hide the BUTTON, then the user cannot toggle it.
+   Let's assume the user wants the sidebar to be permanently visible or managed differently on desktop,
+   OR simply that the toggle button itself is hidden (maybe sidebar is always open?).
+   
+   Let's update .sidebar-toggle-btn to be display: none (or hidden via media query) for desktop.
+*/
+
+.sidebar-toggle-btn {
+    display: none;
+    /* Hidden by default (Desktop) - mainly for the Right menu */
+    background: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+/* Show the LEFT toggle (Filters) on desktop */
+.navbar-left .sidebar-toggle-btn {
+    display: flex;
+}
+
+@media (max-width: 768px) {
+
+    /* Show ALL toggles (Left and Right) on mobile */
+    .sidebar-toggle-btn {
+        display: flex;
+    }
+}
+
+.sidebar-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-logo h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+/* Real Estate Map Container */
+.real-estate-map {
+    position: fixed;
+    top: 64px;
+    /* Move down by navbar height */
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 64px);
+    /* Subtract navbar height */
+    display: flex;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    direction: rtl;
+}
+
 /* Property Type Toggle */
 .property-type-toggle {
     display: flex;
@@ -283,39 +373,7 @@ input:checked+.toggle-slider:before {
     font-size: 13px;
 }
 
-/* Sidebar Toggle Button */
-.sidebar-toggle {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: white;
-    border: 1px solid #e0e0e0;
-    width: 32px;
-    height: 48px;
-    border-radius: 0 8px 8px 0;
-    cursor: pointer;
-    display: none;
-    /* Hidden on desktop */
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    color: #666;
-    transition: all 0.2s;
-    z-index: 101;
-}
 
-.sidebar-toggle.left {
-    left: -32px;
-}
-
-.sidebar-toggle.right {
-    right: -32px;
-    border-radius: 8px 0 0 8px;
-}
-
-.sidebar-toggle:hover {
-    background: #f5f5f5;
-}
 
 /* Map Container */
 .map-container-main {

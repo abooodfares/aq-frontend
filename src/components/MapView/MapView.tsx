@@ -24,6 +24,7 @@ const MapView: React.FC = () => {
                     };
                     addProperty(newProperty);
                 }}
+                
 
                 {...viewState}
                 onMove={evt => setViewState(evt.viewState as ViewState)}
