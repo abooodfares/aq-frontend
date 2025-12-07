@@ -18,11 +18,15 @@ export const useMapState = (): MapState => {
         setProperties((prev) => prev.filter((p) => p.id !== id));
     };
 
+    const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+
     return {
         viewState,
         setViewState,
         properties,
         addProperty,
-        removeProperty
+        removeProperty,
+        selectedProperty,
+        setSelectedProperty
     };
 };

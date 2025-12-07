@@ -47,6 +47,8 @@ export interface MapState {
     properties: Property[];
     addProperty: (property: Property) => void;
     removeProperty: (id: number) => void;
+    selectedProperty: Property | null;
+    setSelectedProperty: (property: Property | null) => void;
 }
 
 export interface SidebarState {
