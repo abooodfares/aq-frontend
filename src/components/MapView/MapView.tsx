@@ -4,6 +4,7 @@ import Map, { NavigationControl, Popup } from 'react-map-gl';
 import PropertyMarker from './PropertyMarker';
 import type { ViewState, Property } from '../../models/types';
 import { useApp } from '../../context/AppContext';
+import { getPlaceFromCoordinates } from '../../services/mapboxService';
 
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
@@ -26,23 +27,10 @@ const MapView: React.FC = () => {
                     let district = '';
 
                     try {
-                        const response = await fetch(
-                            `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${MAPBOX_TOKEN}&types=place,neighborhood,locality&language=ar`
-                        );
-                        const data = await response.json();
-
-                        if (data.features) {
-                            data.features.forEach((feature: any) => {
-                                if (feature.place_type.includes('place')) {
-                                    city = feature.text;
-                                }
-                                if (feature.place_type.includes('neighborhood') || feature.place_type.includes('locality')) {
-                                    district = feature.text;
-                                }
-                            });
-                        }
+                        const location = await getPlaceFromCoordinates(lng, lat);
+                        if (location.city) city = location.city;
+                        if (location.district) district = location.district;
                     } catch (error) {
-                        console.error("Reverse geocoding failed", error);
                         city = 'غير معروف';
                     }
 
